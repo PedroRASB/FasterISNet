@@ -9,15 +9,15 @@ ISNetFlexLightning.py: PyTorch Lightning implementation of Selective, Stochastic
 
 ISNetFlexTorch.py: PyTorch Lightning of Selective, Stochastic and Original ISNets, based on LRP-Flex.
 
-## LRP-Block-based ISNets
+## LRP Block-based ISNets
 
-ISNets based on the LRP-Block implementation, from (1), with the modifications explained in Appendix B of the paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks". Implemented for DenseNet, ResNet, VGG and simple nn.Sequential backbones.
+ISNets based on the LRP Block implementation, from (1), with the modifications explained in Appendix B of the paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks". Implemented for DenseNet, ResNet, VGG and simple nn.Sequential backbones.
 
-ISNetLightningZe.py: PyTorch Lightning implementation of all Faster and Original ISNets, based on LRP-Block.
+ISNetLightningZe.py: PyTorch Lightning implementation of all Faster and Original ISNets, based on LRP Block.
 
-ISNetLayersZe.py: PyTorch implementation of all Faster and Original ISNets, based on LRP-Block.
+ISNetLayersZe.py: PyTorch implementation of all Faster and Original ISNets, based on LRP Block.
 
-ISNetFunctionsZe.py: Functions for LRP-Block, introduced in (1) and expanded in this work.
+ISNetFunctionsZe.py: Functions for LRP Block, introduced in (1) and expanded in this work.
 
 ## ISNet Softmax Grad * Input Ablation
 
@@ -35,7 +35,7 @@ resnet.py: resnet code, based on TorchVision. Removes in-place ReLU, and adds an
 
 RunISNetGrad.py: Train and test ISNet Softmax Grad* Input on MNIST.
 
-RunISNet.py: Train and test LRP-Block-based ISNets on MNIST.
+RunISNet.py: Train and test LRP Block-based ISNets on MNIST.
 
 RunISNetFlex.py: Train and test LRP-Flex-based ISNets on MNIST.
 
@@ -78,7 +78,7 @@ net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True
                                 randomLogit=False,heat=True)
 ```
 
-## LRP-Block-based ISNets
+## LRP Block-based ISNets
 ```
 import ISNetLightningZe
 
