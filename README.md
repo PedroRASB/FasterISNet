@@ -48,59 +48,51 @@ locations.py: Folder locations for training script.
 
 # Faster ISNet Creation Examples
 ## LRP-Flex-based ISNets
-'''
+```
 import LRPDenseNetZe
-
 import ISNetFlexLightning
-
 DenseNet=LRPDenseNetZe.densenet121(pretrained=False)
 
 #Stochastic ISNet
-
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
                                 HiddenLayerPenalization=False,
                                 randomLogit=True,heat=True)
+                                
 #Stochastic ISNet LRP Deep Supervision
-
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
                                 HiddenLayerPenalization=True,
                                 randomLogit=True,heat=True)
 #Selective ISNet
-
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
                                 HiddenLayerPenalization=False,
                                 randomLogit=False,heat=True)
 
 #Selective ISNet LRP Deep Supervision
-
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
                                 HiddenLayerPenalization=True,
                                 randomLogit=False,heat=True)
                                 
 #Original ISNet
-
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True,
                                 HiddenLayerPenalization=False,
                                 randomLogit=False,heat=True)
-'''
+```
 
 ## LRP-Block-based ISNets
-'''
+```
 import ISNetLightningZe
-                                
-#Dual ISNet
 
+#Dual ISNet
 net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
                               penalizeAll=False, highest=False,randomLogit=True,
                               rule='z+e')
 
 #Dual ISNet LRP Deep Supervision
-
 net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
                               penalizeAll=True, highest=False,randomLogit=True,
                               rule='z+e')                           
 
-'''
+```
 
 # Benchmark models
 
