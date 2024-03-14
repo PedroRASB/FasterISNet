@@ -113,7 +113,9 @@ torchvision (0.12.0), matplotlib (3.5.1), numpy (1.21.5), h5py (3.7.0), scikit-i
 Our study is based on public datasets.
 
 COVID-19 X-ray database: available from (1).
+
 Stanford Dogs: http://vision.stanford.edu/aditya86/ImageNetDogs/
+
 MNIST: http://yann.lecun.com/exdb/mnist/
 
 
