@@ -1,4 +1,7 @@
 Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks"
+# Abstract
+
+Bias or spurious correlations in image backgrounds can impact neural networks, causing shortcut learning (Clever Hans Effect) and hampering generalization to real-world data. ISNet, a recently introduced architecture, proposed the optimization of Layer-Wise Relevance Propagation (LRP, an explanation technique) heatmaps, to mitigate the influence of backgrounds on deep classifiers. However, ISNet's training time scales linearly with the number of classes in an application. Here, we propose reformulated architectures whose training time becomes independent from this number. Additionally, we introduce a concise and model-agnostic LRP implementation. We challenge the proposed architectures using synthetic background bias, and COVID-19 detection in chest X-rays, an application that commonly presents background bias. The networks hindered background attention and shortcut learning, surpassing multiple state-of-the-art models on out-of-distribution test datasets. Representing a potentially massive training speed improvement over ISNet, the proposed architectures introduce LRP optimization into a gamut of applications that the original model cannot feasibly handle.
 
 # Content
 ## LRP-Flex-based ISNets
@@ -44,6 +47,42 @@ SingleLabelEval.py: Evaluation script.
 compare_auc_delong_xu.py: Dependency of SingleLabelEval.py.
 
 locations.py: Folder locations for training script.
+
+# Citations
+If you use this code, please cite the papers below:
+
+Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. arXiv: http://arxiv.org/abs/2401.08409
+
+Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. (2024). Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. Nature Communications 15, 291. https://doi.org/10.1038/s41467-023-44371-z
+
+BibTeX:
+
+```
+@misc{bassi2024faster,
+      title={Faster ISNet for Background Bias Mitigation on Deep Neural Networks}, 
+      author={Pedro R. A. S. Bassi and Sergio Decherchi and Andrea Cavalli},
+      year={2024},
+      eprint={2401.08409},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
+}
+```
+
+```
+@article{Bassi2024,
+  title = {Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization},
+  volume = {15},
+  ISSN = {2041-1723},
+  url = {http://dx.doi.org/10.1038/s41467-023-44371-z},
+  DOI = {10.1038/s41467-023-44371-z},
+  number = {1},
+  journal = {Nature Communications},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Bassi,  Pedro R. A. S. and Dertkigil,  Sergio S. J. and Cavalli,  Andrea},
+  year = {2024},
+  month = jan 
+}
+```
 
 
 # Faster ISNet Creation Examples
@@ -153,40 +192,4 @@ MNIST: http://yann.lecun.com/exdb/mnist/
 # Note
 Additional code, with demo and dataset samples, along with trained DNNs will be released upon paper acceptance.
 
-
-# Citations
-If you use this code, please cite the papers below:
-
-Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. arXiv: http://arxiv.org/abs/2401.08409
-
-Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. (2024). Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. Nature Communications 15, 291. https://doi.org/10.1038/s41467-023-44371-z
-
-BibTeX:
-
-```
-@misc{bassi2024faster,
-      title={Faster ISNet for Background Bias Mitigation on Deep Neural Networks}, 
-      author={Pedro R. A. S. Bassi and Sergio Decherchi and Andrea Cavalli},
-      year={2024},
-      eprint={2401.08409},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
-}
-```
-
-```
-@article{Bassi2024,
-  title = {Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization},
-  volume = {15},
-  ISSN = {2041-1723},
-  url = {http://dx.doi.org/10.1038/s41467-023-44371-z},
-  DOI = {10.1038/s41467-023-44371-z},
-  number = {1},
-  journal = {Nature Communications},
-  publisher = {Springer Science and Business Media LLC},
-  author = {Bassi,  Pedro R. A. S. and Dertkigil,  Sergio S. J. and Cavalli,  Andrea},
-  year = {2024},
-  month = jan 
-}
-```
 
