@@ -7,7 +7,7 @@ ISNets based on the LRP-Flex model agnostic implementation from "Faster ISNet fo
 
 ISNetFlexLightning.py: PyTorch Lightning implementation of Selective, Stochastic and Original ISNets, based on LRP-Flex.
 
-ISNetFlexTorch.py: PyTorch Lightning of Selective, Stochastic and Original ISNets, based on LRP-Flex.
+ISNetFlexTorch.py: PyTorch implementation of Selective, Stochastic and Original ISNets, based on LRP-Flex.
 
 ## LRP-Block-based ISNets
 
@@ -51,31 +51,32 @@ locations.py: Folder locations for training script.
 ```
 import LRPDenseNetZe
 import ISNetFlexLightning
-DenseNet=LRPDenseNetZe.densenet121(pretrained=False)
+
+DenseNet=LRPDenseNetZe.densenet121(pretrained=False)#Example of DNN
 
 #Stochastic ISNet
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
-                                HiddenLayerPenalization=False,
-                                randomLogit=True,heat=True)
+                                    HiddenLayerPenalization=False,
+                                    randomLogit=True,heat=True)
                                 
 #Stochastic ISNet LRP Deep Supervision
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
-                                HiddenLayerPenalization=True,
-                                randomLogit=True,heat=True)
+                                    HiddenLayerPenalization=True,
+                                    randomLogit=True,heat=True)
 #Selective ISNet
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
-                                HiddenLayerPenalization=False,
-                                randomLogit=False,heat=True)
+                                    HiddenLayerPenalization=False,
+                                    randomLogit=False,heat=True)
 
 #Selective ISNet LRP Deep Supervision
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
-                                HiddenLayerPenalization=True,
-                                randomLogit=False,heat=True)
+                                    HiddenLayerPenalization=True,
+                                    randomLogit=False,heat=True)
                                 
 #Original ISNet
 net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True,
-                                HiddenLayerPenalization=False,
-                                randomLogit=False,heat=True)
+                                    HiddenLayerPenalization=False,
+                                    randomLogit=False,heat=True)
 ```
 
 ## LRP-Block-based ISNets
@@ -84,14 +85,41 @@ import ISNetLightningZe
 
 #Dual ISNet
 net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
-                              penalizeAll=False, highest=False,randomLogit=True,
-                              rule='z+e')
+                              penalizeAll=False,highest=False,randomLogit=True,rule='z+e')
 
 #Dual ISNet LRP Deep Supervision
 net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
-                              penalizeAll=True, highest=False,randomLogit=True,
-                              rule='z+e')                           
+                              penalizeAll=True,highest=False,randomLogit=True,rule='z+e')                           
 
+```
+
+# Use LRP-Flex to Explain an arbitrary DNN Decision
+```
+import ISNetFlexTorch
+import LRPDenseNetZe
+
+#Examples of network and image
+DenseNet=LRPDenseNetZe.densenet121(pretrained=False)
+image=torch.randn([1,3,224,224])
+
+#LRP-Flex PyTorch Wrapper
+net=ISNetFlexTorch.ISNetFlex(model=DenseNet,
+                             architecture='densenet121',#write architecture name only for densenet, resnet and VGG
+                             selective=True,Zb=True,multiple=False,HiddenLayerPenalization=False,
+                             randomLogit=False,explainLabels=True)#set explainLabels=False when defining ISNet
+
+#Explain class 3
+out=net(image,runLRPFlex=True,labels=torch.tensor([3]))
+logits=out['output']
+heatmap=out['LRPFlex']['input']
+
+#Plot heatmap
+import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+h=heatmap.squeeze().mean(0).detach().numpy()
+norm=colors.TwoSlopeNorm(vmin=h.min(), vcenter=0, vmax=h.max())
+plt.imshow(h,cmap='RdBu_r', norm=norm,interpolation='nearest')
+plt.show()
 ```
 
 # Benchmark models
