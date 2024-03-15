@@ -1,4 +1,7 @@
 Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks"
+
+https://arxiv.org/abs/2401.08409
+
 # Abstract
 
 Bias or spurious correlations in image backgrounds can impact neural networks, causing shortcut learning (Clever Hans Effect) and hampering generalization to real-world data. ISNet, a recently introduced architecture, proposed the optimization of Layer-Wise Relevance Propagation (LRP, an explanation technique) heatmaps, to mitigate the influence of backgrounds on deep classifiers. However, ISNet's training time scales linearly with the number of classes in an application. Here, we propose reformulated architectures whose training time becomes independent from this number. Additionally, we introduce a concise and model-agnostic LRP implementation. We challenge the proposed architectures using synthetic background bias, and COVID-19 detection in chest X-rays, an application that commonly presents background bias. The networks hindered background attention and shortcut learning, surpassing multiple state-of-the-art models on out-of-distribution test datasets. Representing a potentially massive training speed improvement over ISNet, the proposed architectures introduce LRP optimization into a gamut of applications that the original model cannot feasibly handle.
