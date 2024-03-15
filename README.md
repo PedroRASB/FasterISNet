@@ -93,7 +93,7 @@ net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=Fa
 
 ```
 
-# Use LRP-Flex to Explain an arbitrary DNN Decision
+# Use LRP-Flex to explain an arbitrary DNN decision
 ```
 import ISNetFlexTorch
 import LRPDenseNetZe
