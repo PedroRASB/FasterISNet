@@ -238,7 +238,6 @@ class ISNetFlexLgt(pl.LightningModule):
 
     def validation_step(self,val_batch,batch_idx,dataloader_idx=0):
         torch.set_grad_enabled(True)
-        self.train()
         tmp=self.heat
         
         try:
