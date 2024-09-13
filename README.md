@@ -6,6 +6,82 @@ https://arxiv.org/abs/2401.08409
 
 Bias or spurious correlations in image backgrounds can impact neural networks, causing shortcut learning (Clever Hans Effect) and hampering generalization to real-world data. ISNet, a recently introduced architecture, proposed the optimization of Layer-Wise Relevance Propagation (LRP, an explanation technique) heatmaps, to mitigate the influence of backgrounds on deep classifiers. However, ISNet's training time scales linearly with the number of classes in an application. Here, we propose reformulated architectures whose training time becomes independent from this number. Additionally, we introduce a concise and model-agnostic LRP implementation. We challenge the proposed architectures using synthetic background bias, and COVID-19 detection in chest X-rays, an application that commonly presents background bias. The networks hindered background attention and shortcut learning, surpassing multiple state-of-the-art models on out-of-distribution test datasets. Representing a potentially massive training speed improvement over ISNet, the proposed architectures introduce LRP optimization into a gamut of applications that the original model cannot feasibly handle.
 
+# Faster ISNet Creation Examples
+### LRP-Flex-based ISNets: An easy and fast way to make classifiers ignore backgrounds
+```
+import LRPDenseNetZe
+import ISNetFlexLightning
+
+DenseNet=LRPDenseNetZe.densenet121(pretrained=False)#Example of DNN
+
+#Stochastic ISNet
+net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
+                                    HiddenLayerPenalization=False,
+                                    randomLogit=True,heat=True)
+                                
+#Stochastic ISNet LRP Deep Supervision
+net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
+                                    HiddenLayerPenalization=True,
+                                    randomLogit=True,heat=True)
+#Selective ISNet
+net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
+                                    HiddenLayerPenalization=False,
+                                    randomLogit=False,heat=True)
+
+#Selective ISNet LRP Deep Supervision
+net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
+                                    HiddenLayerPenalization=True,
+                                    randomLogit=False,heat=True)
+                                
+#Original ISNet
+net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True,
+                                    HiddenLayerPenalization=False,
+                                    randomLogit=False,heat=True)
+```
+
+### LRP Block-based ISNets:
+```
+import ISNetLightningZe
+
+#Dual ISNet
+net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
+                              penalizeAll=False,highest=False,randomLogit=True,rule='z+e')
+
+#Dual ISNet LRP Deep Supervision
+net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
+                              penalizeAll=True,highest=False,randomLogit=True,rule='z+e')                           
+
+```
+
+# Use LRP-Flex to explain an arbitrary DNN decision
+```
+import ISNetFlexTorch
+import LRPDenseNetZe
+
+#Examples of network and image
+DenseNet=LRPDenseNetZe.densenet121(pretrained=False)
+image=torch.randn([1,3,224,224])
+
+#LRP-Flex PyTorch Wrapper
+net=ISNetFlexTorch.ISNetFlex(model=DenseNet,
+                             architecture='densenet121',#write architecture name only for densenet, resnet and VGG
+                             selective=True,Zb=True,multiple=False,HiddenLayerPenalization=False,
+                             randomLogit=False,explainLabels=True)#set explainLabels=False when defining ISNet
+
+#Explain class 3
+out=net(image,runLRPFlex=True,labels=torch.tensor([3]))
+logits=out['output']
+heatmap=out['LRPFlex']['input']
+
+#Plot heatmap
+import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+h=heatmap.squeeze().mean(0).detach().numpy()
+norm=colors.TwoSlopeNorm(vmin=h.min(), vcenter=0, vmax=h.max())
+plt.imshow(h,cmap='RdBu_r', norm=norm,interpolation='nearest')
+plt.show()
+```
+
 # Content
 ### LRP-Flex-based ISNets:
 
@@ -88,81 +164,7 @@ BibTeX:
 ```
 
 
-# Faster ISNet Creation Examples
-### LRP-Flex-based ISNets:
-```
-import LRPDenseNetZe
-import ISNetFlexLightning
 
-DenseNet=LRPDenseNetZe.densenet121(pretrained=False)#Example of DNN
-
-#Stochastic ISNet
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
-                                    HiddenLayerPenalization=False,
-                                    randomLogit=True,heat=True)
-                                
-#Stochastic ISNet LRP Deep Supervision
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
-                                    HiddenLayerPenalization=True,
-                                    randomLogit=True,heat=True)
-#Selective ISNet
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
-                                    HiddenLayerPenalization=False,
-                                    randomLogit=False,heat=True)
-
-#Selective ISNet LRP Deep Supervision
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
-                                    HiddenLayerPenalization=True,
-                                    randomLogit=False,heat=True)
-                                
-#Original ISNet
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True,
-                                    HiddenLayerPenalization=False,
-                                    randomLogit=False,heat=True)
-```
-
-### LRP Block-based ISNets:
-```
-import ISNetLightningZe
-
-#Dual ISNet
-net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
-                              penalizeAll=False,highest=False,randomLogit=True,rule='z+e')
-
-#Dual ISNet LRP Deep Supervision
-net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
-                              penalizeAll=True,highest=False,randomLogit=True,rule='z+e')                           
-
-```
-
-# Use LRP-Flex to explain an arbitrary DNN decision
-```
-import ISNetFlexTorch
-import LRPDenseNetZe
-
-#Examples of network and image
-DenseNet=LRPDenseNetZe.densenet121(pretrained=False)
-image=torch.randn([1,3,224,224])
-
-#LRP-Flex PyTorch Wrapper
-net=ISNetFlexTorch.ISNetFlex(model=DenseNet,
-                             architecture='densenet121',#write architecture name only for densenet, resnet and VGG
-                             selective=True,Zb=True,multiple=False,HiddenLayerPenalization=False,
-                             randomLogit=False,explainLabels=True)#set explainLabels=False when defining ISNet
-
-#Explain class 3
-out=net(image,runLRPFlex=True,labels=torch.tensor([3]))
-logits=out['output']
-heatmap=out['LRPFlex']['input']
-
-#Plot heatmap
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-h=heatmap.squeeze().mean(0).detach().numpy()
-norm=colors.TwoSlopeNorm(vmin=h.min(), vcenter=0, vmax=h.max())
-plt.imshow(h,cmap='RdBu_r', norm=norm,interpolation='nearest')
-plt.show()
-```
 
 # Benchmark models
 
