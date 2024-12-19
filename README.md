@@ -1,10 +1,19 @@
-Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks"
+Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks", a faster version of ISNet (Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization, Nature Communications, 2024).
 
 https://arxiv.org/abs/2401.08409
 
 # Abstract
 
 Bias or spurious correlations in image backgrounds can impact neural networks, causing shortcut learning (Clever Hans Effect) and hampering generalization to real-world data. ISNet, a recently introduced architecture, proposed the optimization of Layer-Wise Relevance Propagation (LRP, an explanation technique) heatmaps, to mitigate the influence of backgrounds on deep classifiers. However, ISNet's training time scales linearly with the number of classes in an application. Here, we propose reformulated architectures whose training time becomes independent from this number. Additionally, we introduce a concise and model-agnostic LRP implementation. We challenge the proposed architectures using synthetic background bias, and COVID-19 detection in chest X-rays, an application that commonly presents background bias. The networks hindered background attention and shortcut learning, surpassing multiple state-of-the-art models on out-of-distribution test datasets. Representing a potentially massive training speed improvement over ISNet, the proposed architectures introduce LRP optimization into a gamut of applications that the original model cannot feasibly handle.
+
+# Installation
+```bash
+conda create --name isnet python=3.8
+conda activate isnet
+conda install pip=23.3.2
+conda install ipykernel
+pip install -r requirements.txt
+```
 
 # Faster ISNet Creation Examples
 
@@ -133,21 +142,25 @@ locations.py: Folder locations for training script.
 # Citations
 If you use this code, please cite the papers below:
 
-Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. arXiv: http://arxiv.org/abs/2401.08409
+Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. IEEE Access.
 
 Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. (2024). Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. Nature Communications 15, 291. https://doi.org/10.1038/s41467-023-44371-z
 
 BibTeX:
 
 ```
-@misc{bassi2024faster,
-      title={Faster ISNet for Background Bias Mitigation on Deep Neural Networks}, 
-      author={Pedro R. A. S. Bassi and Sergio Decherchi and Andrea Cavalli},
-      year={2024},
-      eprint={2401.08409},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
+@ARTICLE{Bassi2024-qj,
+  title     = "Faster {ISNet} for background bias mitigation on deep neural
+               networks",
+  author    = "Bassi, Pedro R A S and Decherchi, Sergio and Cavalli, Andrea",
+  journal   = "IEEE Access",
+  publisher = "Institute of Electrical and Electronics Engineers (IEEE)",
+  volume    =  12,
+  pages     = "155151--155167",
+  year      =  2024,
+  copyright = "https://creativecommons.org/licenses/by/4.0/legalcode"
 }
+
 ```
 
 ```
