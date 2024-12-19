@@ -1,6 +1,6 @@
 Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks", a faster version of ISNet (Nature Communications, 2024).
 
-https://arxiv.org/abs/2401.08409
+[Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10681068)
 
 # Abstract
 
