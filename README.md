@@ -1,4 +1,4 @@
-Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks", a faster version of ISNet (Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization, Nature Communications, 2024).
+Code for paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks", a faster version of ISNet (Nature Communications, 2024).
 
 https://arxiv.org/abs/2401.08409
 
