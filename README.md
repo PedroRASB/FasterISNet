@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 Dependencies: Python, PyTorch, PyTorch Lightning
 
-### LRP-Flex-based ISNets: An easy and fast way to make classifiers ignore backgrounds
+### LRP-Flex-based ISNets: An easy and fast way to make classifiers ignore backgrounds (Faster ISNet Paper)
 ```
 import LRPDenseNetZe
 import ISNetFlexLightning
@@ -51,7 +51,7 @@ net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True
                                     randomLogit=False,heat=True)
 ```
 
-### LRP Block-based ISNets:
+### LRP Block-based ISNets (Original ISNet Paper - Nature Comms.):
 ```
 import ISNetLightningZe
 
