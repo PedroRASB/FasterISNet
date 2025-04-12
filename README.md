@@ -1,14 +1,19 @@
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/ac189c06-30ab-4f6f-a912-74d902939f49" alt="ISNetLogo" width="200"/>
+</div>
+
 # ISNet & Faster ISNet
 
-Natural and medical images (e.g., X-rays) coommonly present background features that are correlated to the classes we want to classify. For example, in an early COVID-19 classification dataset, most COVID-19 X-rays came from Italy, while most healthy images came from the USA. Thus, classifiers trained in these datasets saw Italian words in the background of X-rays as signs of COVID-19, increasing their confidence for the COVID-19 class. In the **ISNet**, we proposed directly optimizing explanation heatmaps produced by LRP, to minimize the attention classifiers pay to background of images (e.g., areas outside of the lungs in X-rays). The tecnhique made the classifiers ignore even srong background bias, improving OOD generalization. The ISNet surpassed several alternative methods, like Right for the Right Reasons and Grad-CAM based methods. The **Faster ISNet** is an evolution of the ISNet, with faster training and **easy application to any neural network architecture**. During testing, the ISNet adds no extra computational cost to the classifier.
+Natural and medical images (e.g., X-rays) coommonly present background features that are correlated to the classes we want to classify. For example, in an early COVID-19 classification dataset, most COVID-19 X-rays came from Italy, while most healthy images came from the USA. Thus, classifiers trained in these datasets saw Italian words in the background of X-rays as signs of COVID-19, increasing their confidence for the COVID-19 class. These classifiers generalized poorly to new hospitals. With the **ISNet**, we directly optimize explanation heatmaps produced by Layer-wise Relevance Propagation (LRP), to minimize the attention classifiers pay to the background of images (e.g., areas outside of the lungs in X-rays). The ISNet ignored even srong background bias in X-rays and natural images, improving OOD generalization (e.g., to new hospitals). The ISNet surpassed several alternative methods, like Right for the Right Reasons and Grad-CAM based methods. The **Faster ISNet** is an evolution of the ISNet, with faster training and **easy application to any neural network architecture**. During testing, the ISNet adds no extra computational cost to the classifier.
 
 
 ## Papers
 
-- Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. **Nature Communications** 15, 291 (2024). https://doi.org/10.1038/s41467-023-44371-z
+- Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. **Nature Communications** 15, 291 (2024). https://www.nature.com/articles/s41467-023-44371-z
 
 
-- Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. IEEE Access. https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10681068
+- Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. **IEEE Access**. https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10681068
 
 
 ## Installation
@@ -22,8 +27,9 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-
-<img src="https://github.com/user-attachments/assets/56fac6b6-c4bc-4b91-9a8c-2daa1fca4e54" alt="ISNetTeaser" width="500"/>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/56fac6b6-c4bc-4b91-9a8c-2daa1fca4e54" alt="ISNetTeaser" width="500"/>
+</div>
 
 ### Train and test
 
