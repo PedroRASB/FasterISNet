@@ -3,6 +3,7 @@
   <img src="https://github.com/user-attachments/assets/e804dce9-9961-4a11-a046-3a7df4836552" alt="ISNetLogo" width="200"/>
 </div>
 
+
 # ISNet & Faster ISNet
 
 Natural and medical images (e.g., X-rays) coommonly present background features that are correlated to the classes we want to classify. For example, in an early COVID-19 classification dataset, most COVID-19 X-rays came from Italy, while most healthy images came from the USA. Thus, classifiers trained in these datasets saw Italian words in the background of X-rays as signs of COVID-19, increasing their confidence for the COVID-19 class. These classifiers generalized poorly to new hospitals. With the **ISNet**, we directly optimize explanation heatmaps produced by Layer-wise Relevance Propagation (LRP), to minimize the attention classifiers pay to the background of images (e.g., areas outside of the lungs in X-rays). The ISNet ignored even strong background bias in X-rays and natural images, improving OOD generalization (e.g., to new hospitals). The ISNet surpassed several alternative methods, like Right for the Right Reasons and Grad-CAM based methods. The **Faster ISNet** is an evolution of the ISNet, with faster training and **easy application to any neural network architecture**. During testing, the ISNet adds no extra computational cost to the classifier.
@@ -10,10 +11,17 @@ Natural and medical images (e.g., X-rays) coommonly present background features 
 
 ## Papers
 
-- Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. **Nature Communications** 15, 291 (2024). https://www.nature.com/articles/s41467-023-44371-z
+<b>Improving deep neural network generalization and robustness to background bias via layer‐wise relevance propagation optimization</b> <br/>
+Pedro R. A. S. Bassi, Sergio S. J. Dertkigil, Andrea Cavalli <br/>
+Nature Communications, 15, 291 (2024) <br/>
+[Read More](https://www.nature.com/articles/s41467-023-44371-z) <br/>
 
+<br/>
 
-- Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. **IEEE Access**. https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10681068
+<b>Faster ISNet for Background Bias Mitigation on Deep Neural Networks</b> <br/>
+Pedro R. A. S. Bassi, Sergio Decherchi, Aandrea Cavalli <br/>
+IEEE Access (2024) <br/>
+[Read More](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10681068) <br/>
 
 
 ## Installation
@@ -228,11 +236,21 @@ MNIST: http://yann.lecun.com/exdb/mnist/
 ## Citations
 If you use this code, please cite the papers below:
 
-Bassi, P. R. A. S., Decherchi, S., & Cavalli, A. (2024). Faster ISNet for Background Bias Mitigation on Deep Neural Networks. IEEE Access.
-
-Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. (2024). Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. Nature Communications 15, 291. https://doi.org/10.1038/s41467-023-44371-z
-
-BibTeX:
+```
+@article{Bassi2024,
+  title = {Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization},
+  volume = {15},
+  ISSN = {2041-1723},
+  url = {http://dx.doi.org/10.1038/s41467-023-44371-z},
+  DOI = {10.1038/s41467-023-44371-z},
+  number = {1},
+  journal = {Nature Communications},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Bassi,  Pedro R. A. S. and Dertkigil,  Sergio S. J. and Cavalli,  Andrea},
+  year = {2024},
+  month = jan 
+}
+```
 
 ```
 @ARTICLE{Bassi2024-qj,
@@ -249,20 +267,5 @@ BibTeX:
 
 ```
 
-```
-@article{Bassi2024,
-  title = {Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization},
-  volume = {15},
-  ISSN = {2041-1723},
-  url = {http://dx.doi.org/10.1038/s41467-023-44371-z},
-  DOI = {10.1038/s41467-023-44371-z},
-  number = {1},
-  journal = {Nature Communications},
-  publisher = {Springer Science and Business Media LLC},
-  author = {Bassi,  Pedro R. A. S. and Dertkigil,  Sergio S. J. and Cavalli,  Andrea},
-  year = {2024},
-  month = jan 
-}
-```
 
 
