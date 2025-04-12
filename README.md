@@ -15,6 +15,21 @@ conda install ipykernel
 pip install -r requirements.txt
 ```
 
+# Quick Start
+
+Use the following code to train and test an ISNet in the MNIST dataset with background bias.
+
+For the original version of the ISNet (Nature Communications):
+```bash
+python RunISNet.py
+```
+
+For the latest version of the ISNet (faster training):
+```bash
+python RunISNetFlex.py
+```
+
+
 # Faster ISNet Creation Examples
 
 Dependencies: Python, PyTorch, PyTorch Lightning
