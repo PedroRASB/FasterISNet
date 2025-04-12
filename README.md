@@ -5,7 +5,7 @@
 
 # ISNet & Faster ISNet
 
-Natural and medical images (e.g., X-rays) coommonly present background features that are correlated to the classes we want to classify. For example, in an early COVID-19 classification dataset, most COVID-19 X-rays came from Italy, while most healthy images came from the USA. Thus, classifiers trained in these datasets saw Italian words in the background of X-rays as signs of COVID-19, increasing their confidence for the COVID-19 class. These classifiers generalized poorly to new hospitals. With the **ISNet**, we directly optimize explanation heatmaps produced by Layer-wise Relevance Propagation (LRP), to minimize the attention classifiers pay to the background of images (e.g., areas outside of the lungs in X-rays). The ISNet ignored even srong background bias in X-rays and natural images, improving OOD generalization (e.g., to new hospitals). The ISNet surpassed several alternative methods, like Right for the Right Reasons and Grad-CAM based methods. The **Faster ISNet** is an evolution of the ISNet, with faster training and **easy application to any neural network architecture**. During testing, the ISNet adds no extra computational cost to the classifier.
+Natural and medical images (e.g., X-rays) coommonly present background features that are correlated to the classes we want to classify. For example, in an early COVID-19 classification dataset, most COVID-19 X-rays came from Italy, while most healthy images came from the USA. Thus, classifiers trained in these datasets saw Italian words in the background of X-rays as signs of COVID-19, increasing their confidence for the COVID-19 class. These classifiers generalized poorly to new hospitals. With the **ISNet**, we directly optimize explanation heatmaps produced by Layer-wise Relevance Propagation (LRP), to minimize the attention classifiers pay to the background of images (e.g., areas outside of the lungs in X-rays). The ISNet ignored even strong background bias in X-rays and natural images, improving OOD generalization (e.g., to new hospitals). The ISNet surpassed several alternative methods, like Right for the Right Reasons and Grad-CAM based methods. The **Faster ISNet** is an evolution of the ISNet, with faster training and **easy application to any neural network architecture**. During testing, the ISNet adds no extra computational cost to the classifier.
 
 
 ## Papers
@@ -89,96 +89,141 @@ plt.show()
 
 Dependencies: Python, PyTorch, PyTorch Lightning
 
-### LRP-Flex-based ISNets: An easy and fast way to make classifiers ignore backgrounds (Faster ISNet Paper)
-```
-import LRPDenseNetZe
-import ISNetFlexLightning
+#### LRP-Flex-based ISNets: An easy and fast way to make classifiers ignore backgrounds (Faster ISNet Paper)
 
-DenseNet=LRPDenseNetZe.densenet121(pretrained=False)#Example of DNN
+<details>
+  <summary><strong>Click to expand details</strong></summary>
 
-#Stochastic ISNet
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
-                                    HiddenLayerPenalization=False,
-                                    randomLogit=True,heat=True)
-                                
-#Stochastic ISNet LRP Deep Supervision
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
-                                    HiddenLayerPenalization=True,
-                                    randomLogit=True,heat=True)
-#Selective ISNet
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
-                                    HiddenLayerPenalization=False,
-                                    randomLogit=False,heat=True)
+  ```
+  import LRPDenseNetZe
+  import ISNetFlexLightning
 
-#Selective ISNet LRP Deep Supervision
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
-                                    HiddenLayerPenalization=True,
-                                    randomLogit=False,heat=True)
-                                
-#Original ISNet
-net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True,
-                                    HiddenLayerPenalization=False,
-                                    randomLogit=False,heat=True)
-```
+  DenseNet=LRPDenseNetZe.densenet121(pretrained=False)#Example of DNN
 
-### LRP Block-based ISNets (Original ISNet Paper - Nature Comms.):
-```
-import ISNetLightningZe
+  #Stochastic ISNet
+  net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
+                                      HiddenLayerPenalization=False,
+                                      randomLogit=True,heat=True)
+                                  
+  #Stochastic ISNet LRP Deep Supervision
+  net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=False,
+                                      HiddenLayerPenalization=True,
+                                      randomLogit=True,heat=True)
+  #Selective ISNet
+  net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
+                                      HiddenLayerPenalization=False,
+                                      randomLogit=False,heat=True)
 
-#Dual ISNet
-net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
-                              penalizeAll=False,highest=False,randomLogit=True,rule='z+e')
+  #Selective ISNet LRP Deep Supervision
+  net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=True,multiple=False,
+                                      HiddenLayerPenalization=True,
+                                      randomLogit=False,heat=True)
+                                  
+  #Original ISNet
+  net=ISNetFlexLightning.ISNetFlexLgt(model=DenseNet,selective=False,multiple=True,
+                                      HiddenLayerPenalization=False,
+                                      randomLogit=False,heat=True)
+  ```
 
-#Dual ISNet LRP Deep Supervision
-net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
-                              penalizeAll=True,highest=False,randomLogit=True,rule='z+e')                           
+</details>
 
-```
+#### LRP Block-based ISNets (Original ISNet Paper - Nature Comms.):
+
+
+<details>
+  <summary><strong>Click to expand details</strong></summary>
+
+  ```
+  import ISNetLightningZe
+
+  #Dual ISNet
+  net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
+                                penalizeAll=False,highest=False,randomLogit=True,rule='z+e')
+
+  #Dual ISNet LRP Deep Supervision
+  net=ISNetLightningZe.ISNetLgt(architecture='densenet121',classes=10,selective=False,multiple=False,
+                                penalizeAll=True,highest=False,randomLogit=True,rule='z+e')                           
+
+  ```
+
+</details>
 
 ## Files and Content
-### LRP-Flex-based ISNets:
 
-ISNets based on the LRP-Flex model agnostic implementation from "Faster ISNet for Background Bias Mitigation on Deep Neural Networks".
+<details>
+  <summary><strong>Click to expand details</strong></summary>
 
-ISNetFlexLightning.py: PyTorch Lightning implementation of Selective, Stochastic and Original ISNets, based on LRP-Flex.
+  ### LRP-Flex-based ISNets:
 
-ISNetFlexTorch.py: PyTorch implementation of Selective, Stochastic and Original ISNets, based on LRP-Flex.
+  ISNets based on the LRP-Flex model agnostic implementation from "Faster ISNet for Background Bias Mitigation on Deep Neural Networks".
 
-### LRP Block-based ISNets:
+  ISNetFlexLightning.py: PyTorch Lightning implementation of Selective, Stochastic and Original ISNets, based on LRP-Flex.
 
-ISNets based on the LRP Block implementation, from (1), with the modifications explained in Appendix B of the paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks". Implemented for DenseNet, ResNet, VGG and simple nn.Sequential backbones.
+  ISNetFlexTorch.py: PyTorch implementation of Selective, Stochastic and Original ISNets, based on LRP-Flex.
 
-ISNetLightningZe.py: PyTorch Lightning implementation of all Faster and Original ISNets, based on LRP Block.
+  ### LRP Block-based ISNets:
 
-ISNetLayersZe.py: PyTorch implementation of all Faster and Original ISNets, based on LRP Block.
+  ISNets based on the LRP Block implementation, from (1), with the modifications explained in Appendix B of the paper "Faster ISNet for Background Bias Mitigation on Deep Neural Networks". Implemented for DenseNet, ResNet, VGG and simple nn.Sequential backbones.
 
-ISNetFunctionsZe.py: Functions for LRP Block, introduced in (1) and expanded in this work.
+  ISNetLightningZe.py: PyTorch Lightning implementation of all Faster and Original ISNets, based on LRP Block.
 
-### ISNet Softmax Grad * Input Ablation:
+  ISNetLayersZe.py: PyTorch implementation of all Faster and Original ISNets, based on LRP Block.
 
-ISNetLightningZeGradient.py: Implementation of ISNet Softmax Grad * Input ablation study.
+  ISNetFunctionsZe.py: Functions for LRP Block, introduced in (1) and expanded in this work.
 
-### Extras:
+  ### ISNet Softmax Grad * Input Ablation:
 
-globalsZe.py global variables shared across modules.
+  ISNetLightningZeGradient.py: Implementation of ISNet Softmax Grad * Input ablation study.
 
-LRPDenseNetZe.py: DenseNet code, based on TorchVision. Removes in-place ReLU, and adds an extra ReLU in transition layers. From (1).
+  ### Extras:
 
-resnet.py: resnet code, based on TorchVision. Removes in-place ReLU, and adds an extra ReLU in transition layers.
+  globalsZe.py global variables shared across modules.
 
-### Training Script Examples:
+  LRPDenseNetZe.py: DenseNet code, based on TorchVision. Removes in-place ReLU, and adds an extra ReLU in transition layers. From (1).
 
-RunISNetGrad.py: Train and test ISNet Softmax Grad* Input on MNIST.
+  resnet.py: resnet code, based on TorchVision. Removes in-place ReLU, and adds an extra ReLU in transition layers.
 
-RunISNet.py: Train and test LRP Block-based ISNets on MNIST.
 
-RunISNetFlex.py: Train and test LRP-Flex-based ISNets on MNIST.
+  ### Training Script Examples:
 
-SingleLabelEval.py: Evaluation script.
+  RunISNetGrad.py: Train and test ISNet Softmax Grad* Input on MNIST.
 
-compare_auc_delong_xu.py: Dependency of SingleLabelEval.py.
+  RunISNet.py: Train and test LRP Block-based ISNets on MNIST.
 
-locations.py: Folder locations for training script.
+  RunISNetFlex.py: Train and test LRP-Flex-based ISNets on MNIST.
+
+  SingleLabelEval.py: Evaluation script.
+
+  compare_auc_delong_xu.py: Dependency of SingleLabelEval.py.
+
+  locations.py: Folder locations for training script.
+
+</details>
+
+
+## Pre-trained Models
+For the applications in the Nature Communications paper (COVID-19 and Tuberculosis detection, CheXpert classification, dog breed classification and facial attribute estimation), please find the ISNet pre-trained weigths on: https://drive.google.com/drive/folders/1hIJp4c11R65db2K7EN4rYQ7dcr7ce72t?usp=sharing
+
+
+## Observations for the Training Procedure
+For better stability and convergence in the training procedure, we suggest employing gradient clipping (we used norm of 1) and deterministic operations, which may be selected with the following code: torch.use_deterministic_algorithms(True).
+
+A higher P hyper-parameter (heatmap loss weight) increases bias resistance, but reduces training speed. A lower d hyper-parameter (GWRP decay in the heatmap loss) also increases bias resistance, but reduces training stability. If training losses do not converge, please consider increasing the d hyper-parameter and/or reducing learning rate.
+
+
+
+## Datasets
+
+Our study is based on public datasets.
+
+COVID-19 X-ray database: see details in https://doi.org/10.1038/s41467-023-44371-z.
+
+Tuberculosis X-ray database: see details in https://doi.org/10.1038/s41467-023-44371-z.
+
+Stanford Dogs: http://vision.stanford.edu/aditya86/ImageNetDogs/
+
+MNIST: http://yann.lecun.com/exdb/mnist/
+
 
 ## Citations
 If you use this code, please cite the papers below:
@@ -219,36 +264,5 @@ BibTeX:
   month = jan 
 }
 ```
-
-
-
-
-## Benchmark models
-
-For the benchmark models we followed the implementations in (1).
-
-
-## Dependencies
-
-Main dependencies:
-PyTorch (1.11.0), PyTorch Lightning (1.6.3), Python (3.9).
-
-Additional (training script dependencies):
-torchvision (0.12.0), matplotlib (3.5.1), numpy (1.21.5), h5py (3.7.0), scikit-image (0.19.2), scikit-learn (0.23.2), scipy (1.7.3), pandas (1.4.2).
-
-
-## Datasets
-
-Our study is based on public datasets.
-
-COVID-19 X-ray database: available from (1).
-
-Stanford Dogs: http://vision.stanford.edu/aditya86/ImageNetDogs/
-
-MNIST: http://yann.lecun.com/exdb/mnist/
-
-
-## Reference List:
-(1) Bassi, P.R.A.S., Dertkigil, S.S.J. & Cavalli, A. Improving deep neural network generalization and robustness to background bias via layer-wise relevance propagation optimization. Nature Communications 15, 291 (2024). https://doi.org/10.1038/s41467-023-44371-z
 
 
