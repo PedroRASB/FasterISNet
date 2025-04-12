@@ -18,6 +18,7 @@ Natural and medical images (e.g., X-rays) coommonly present background features 
 
 ## Installation
 ```bash
+cd code
 conda create --name isnet python=3.8
 conda activate isnet
 conda install pip=23.3.2
